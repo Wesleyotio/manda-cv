@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('job');
             $table->integer('education_level');
             $table->string('doc_name_cv');
+            $table->string('obs');
             $table->string('ip_candidate');
             $table->timestamps();
         });
