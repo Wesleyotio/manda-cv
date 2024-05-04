@@ -1,4 +1,4 @@
-FROM php:8.1.0-fpm
+FROM php:8.3.0-fpm
 
 # Copy composer.lock and composer.json
 RUN if [-f composer.lock] && [-f composer.json] ; then \
