@@ -40,10 +40,9 @@ class CandidateTest extends TestCase
         Storage::fake('storage');
 
         $file = UploadedFile::fake()->create('cv_test.pdf');
-
+        
         $response = $this->post('api/send-cv',
         [
-            "Accept"=>"application/json",
             'name' => $faker->name,
             'email' => $faker->freeEmail,
             'phone' => $faker->phoneNumberCleared,
@@ -52,6 +51,10 @@ class CandidateTest extends TestCase
             'doc_name_cv' => $file,
             'obs' => $faker->sentence($nbWords = 6, $variableNbWords = true) , 
             'ip_candidate' => $faker->ipv4
+        ],
+        [
+            "Accept" => "application/json",
+           
         ]);
 
 
