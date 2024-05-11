@@ -41,4 +41,30 @@ enum EducationLevel: int
             ]
         ];
     }
+
+    public static function label(int $value): string
+    {
+        switch ($value) {
+            case 1:
+                return 'Ensino Fundamental Incompleto';
+                break;
+            case 2:
+                return 'Ensino Fundamental Completo';
+                break;
+            case 3:
+                return 'Ensino Médio Incompleto';
+                break;
+            case 4:
+                return 'Ensino Médio Completo';
+                break;
+            case 5:
+                return 'Ensino Superior Incompleto';
+                break;
+            case 6:
+                return 'Ensino Superior Completo';
+                break;
+            
+            
+        }
+    }
 }
