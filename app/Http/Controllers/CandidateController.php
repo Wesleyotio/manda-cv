@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EducationLevel;
+use App\Mail\SendCandidate;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Candidate;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -26,7 +28,7 @@ class CandidateController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:candidates',
-            'phone' => 'nullable|string|digits_between:11,11',
+            'phone' => 'nullable|string|digits_between:10,12',
             'job' => 'required|string|max:255',
             'education_level' => 'required|integer',
             'obs' => 'nullable|string|max:255' , 
@@ -56,6 +58,16 @@ class CandidateController extends Controller
                         'success' => true,
                         'message' => 'Currículo enviado com sucesso',
                     ];
+                    $candidateResponse = [
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'phone' => $request->phone,
+                        'job' => $request->job,
+                        'education_level' => EducationLevel::label($request->education_level),
+                        'obs' => $request->obs, 
+                    ];
+                    Mail::to($candidate->email)->send(new SendCandidate( $candidateResponse));
+
                     return response()->json($response, 200);
                 }
             }
